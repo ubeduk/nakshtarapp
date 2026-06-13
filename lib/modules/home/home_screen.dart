@@ -54,7 +54,7 @@ class HomeScreen extends GetView<HomeController> {
 
                       CompetitionFundingSection(),
 
-                      AiAssistantSection(),
+                      // AiAssistantSection(),
 
                       TrendingNewsSection(),
 

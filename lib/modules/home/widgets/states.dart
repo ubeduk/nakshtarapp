@@ -6,21 +6,115 @@ class StatsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 24,
+    final stats = [
+
+      (
+      Icons.school_rounded,
+      "120+",
+      "Universities",
+      const Color(0xff2563EB),
+      ),
+
+      (
+      Icons.currency_rupee,
+      "50+",
+      "Funding",
+      const Color(0xff22C55E),
+      ),
+
+      (
+      Icons.emoji_events,
+      "25+",
+      "Competitions",
+      const Color(0xff9333EA),
+      ),
+
+      (
+      Icons.apartment,
+      "100+",
+      "Incubators",
+      const Color(0xffF97316),
+      ),
+    ];
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
         vertical: 20,
       ),
 
-      padding: const EdgeInsets.symmetric(
-        vertical: 26,
+      child: GridView.builder(
+
+        shrinkWrap: true,
+
+        physics:
+        const NeverScrollableScrollPhysics(),
+
+        itemCount: stats.length,
+
+        gridDelegate:
+        const SliverGridDelegateWithFixedCrossAxisCount(
+
+          crossAxisCount: 2,
+
+          crossAxisSpacing: 14,
+
+          mainAxisSpacing: 14,
+
+          childAspectRatio: 1.1,
+        ),
+
+        itemBuilder: (context, index) {
+
+          final item = stats[index];
+
+          return _StatCard(
+
+            icon: item.$1,
+
+            value: item.$2,
+
+            title: item.$3,
+
+            color: item.$4,
+          );
+        },
       ),
+    );
+  }
+}
+
+class _StatCard extends StatelessWidget {
+
+  final IconData icon;
+  final String value;
+  final String title;
+  final Color color;
+
+  const _StatCard({
+
+    required this.icon,
+
+    required this.value,
+
+    required this.title,
+
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+
+      padding: const EdgeInsets.all(18),
 
       decoration: BoxDecoration(
+
         color: Colors.white,
 
         borderRadius:
-        BorderRadius.circular(30),
+        BorderRadius.circular(24),
 
         border: Border.all(
           color: const Color(
@@ -29,176 +123,99 @@ class StatsSection extends StatelessWidget {
         ),
 
         boxShadow: [
+
           BoxShadow(
+
             color:
-            Colors.black.withOpacity(
-              .03,
-            ),
-            blurRadius: 30,
-            offset: const Offset(
-              0,
-              10,
-            ),
+            color.withOpacity(.08),
+
+            blurRadius: 20,
+
+            offset:
+            const Offset(0, 8),
           ),
         ],
       ),
 
-      child: Row(
-        children: const [
+      child: Column(
 
-          Expanded(
-            child: _StatItem(
-              icon: Icons.school_rounded,
-              iconColor:
-              Color(0xff2563EB),
-              bgColor:
-              Color(0xffEEF4FF),
-              value: "120+",
-              title: "Universities",
+        mainAxisAlignment:
+        MainAxisAlignment.center,
+
+        children: [
+
+          Container(
+
+            width: 54,
+            height: 54,
+
+            decoration:
+            BoxDecoration(
+
+              shape:
+              BoxShape.circle,
+
+              color:
+              color.withOpacity(.12),
+            ),
+
+            child: Icon(
+
+              icon,
+
+              color: color,
+
+              size: 25,
             ),
           ),
 
-          _Divider(),
+          const SizedBox(
+            height: 14,
+          ),
 
-          Expanded(
-            child: _StatItem(
-              icon:
-              Icons.currency_rupee,
-              iconColor:
-              Color(0xff22C55E),
-              bgColor:
-              Color(0xffECFDF3),
-              value: "50+",
-              title:
-              "Funding Programs",
+          Text(
+
+            value,
+
+            style:
+            const TextStyle(
+
+              fontSize: 20,
+
+              fontWeight:
+              FontWeight.w800,
+
+              color:
+              Color(0xff111827),
             ),
           ),
 
-          _Divider(),
-
-          Expanded(
-            child: _StatItem(
-              icon:
-              Icons.emoji_events,
-              iconColor:
-              Color(0xff9333EA),
-              bgColor:
-              Color(0xffF5F3FF),
-              value: "25+",
-              title:
-              "Competitions",
-            ),
+          const SizedBox(
+            height: 4,
           ),
 
-          _Divider(),
+          Text(
 
-          Expanded(
-            child: _StatItem(
-              icon:
-              Icons.apartment,
-              iconColor:
-              Color(0xffF97316),
-              bgColor:
-              Color(0xffFFF7ED),
-              value: "100+",
-              title:
-              "Incubators",
+            title,
+
+            textAlign:
+            TextAlign.center,
+
+            style:
+            const TextStyle(
+
+              fontSize: 13,
+
+              color:
+              Color(0xff64748B),
+
+              fontWeight:
+              FontWeight.w500,
             ),
           ),
         ],
       ),
     );
   }
-
 }
-class _Divider extends StatelessWidget {
-  const _Divider();
 
-  @override
-  Widget build(BuildContext context) {
-
-    return Container(
-      width: 1,
-      height: 90,
-      color: const Color(
-        0xffE5E7EB,
-      ),
-    );
-  }
-}
-class _StatItem extends StatelessWidget {
-
-  final IconData icon;
-  final Color iconColor;
-  final Color bgColor;
-
-  final String value;
-  final String title;
-
-  const _StatItem({
-    required this.icon,
-    required this.iconColor,
-    required this.bgColor,
-    required this.value,
-    required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Column(
-      children: [
-
-        Container(
-          width: 58,
-          height: 58,
-
-          decoration:
-          BoxDecoration(
-            shape:
-            BoxShape.circle,
-            color: bgColor,
-          ),
-
-          child: Icon(
-            icon,
-            size: 30,
-            color: iconColor,
-          ),
-        ),
-
-        const SizedBox(
-          height: 16,
-        ),
-
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 26,
-            fontWeight:
-            FontWeight.w800,
-            color:
-            Color(0xff111827),
-          ),
-        ),
-
-        const SizedBox(
-          height: 6,
-        ),
-
-        Text(
-          title,
-          textAlign:
-          TextAlign.center,
-          style: const TextStyle(
-            fontSize: 15,
-            color:
-            Color(0xff64748B),
-            fontWeight:
-            FontWeight.w500,
-          ),
-        ),
-      ],
-    );
-  }
-}

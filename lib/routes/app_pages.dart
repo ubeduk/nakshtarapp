@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/bottom_nav_shell/bottom_nav_binding.dart';
+import '../modules/bottom_nav_shell/bottom_nav_screen.dart';
 import '../modules/competitions/competitions_binding.dart';
 import '../modules/competitions/competitions_screen.dart';
 import '../modules/funding/funding_binding.dart';
@@ -27,7 +29,11 @@ import 'app_routes.dart';
 
 class AppPages {
   static final routes = [
-
+    GetPage(
+      name: AppRoutes.bottomNav,
+      page: () => const BottomNavScreen(),
+      binding: BottomNavBinding(),
+    ),
     GetPage(
       name: AppRoutes.splash,
       page: () => const SplashScreen(),

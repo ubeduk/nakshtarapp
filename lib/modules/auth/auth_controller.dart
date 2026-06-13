@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../../routes/app_routes.dart';
 
 class AuthController extends GetxController {
@@ -8,48 +7,84 @@ class AuthController extends GetxController {
 
   Future<void> signInWithGoogle() async {
 
-    isLoading.value = true;
+    try {
 
-    await Future.delayed(
-      const Duration(seconds: 2),
-    );
+      isLoading.value = true;
 
-    isLoading.value = false;
+      await Future.delayed(
+        const Duration(seconds: 2),
+      );
 
-    Get.offAllNamed(
-      AppRoutes.home,
-    );
+      Get.offAllNamed(
+        AppRoutes.bottomNav,
+      );
+
+    } catch (e) {
+
+      Get.snackbar(
+        'Error',
+        e.toString(),
+      );
+
+    } finally {
+
+      isLoading.value = false;
+    }
   }
 
   Future<void> loginWithOtp(
       String phone,
       ) async {
 
-    isLoading.value = true;
+    try {
 
-    await Future.delayed(
-      const Duration(seconds: 2),
-    );
+      isLoading.value = true;
 
-    isLoading.value = false;
+      await Future.delayed(
+        const Duration(seconds: 2),
+      );
 
-    Get.offAllNamed(
-      AppRoutes.bottomNav,
-    );
+      Get.offAllNamed(
+        AppRoutes.bottomNav,
+      );
+
+    } catch (e) {
+
+      Get.snackbar(
+        'Error',
+        e.toString(),
+      );
+
+    } finally {
+
+      isLoading.value = false;
+    }
   }
 
   Future<void> signInWithApple() async {
 
-    isLoading.value = true;
+    try {
 
-    await Future.delayed(
-      const Duration(seconds: 2),
-    );
+      isLoading.value = true;
 
-    isLoading.value = false;
+      await Future.delayed(
+        const Duration(seconds: 2),
+      );
 
-    Get.offAllNamed(
-      AppRoutes.home,
-    );
+      Get.offAllNamed(
+        AppRoutes.bottomNav,
+      );
+
+    } catch (e) {
+
+      Get.snackbar(
+        'Error',
+        e.toString(),
+      );
+
+    } finally {
+
+      isLoading.value = false;
+    }
   }
 }

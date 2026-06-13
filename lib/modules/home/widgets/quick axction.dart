@@ -1,269 +1,495 @@
 import 'package:flutter/material.dart';
 
-class QuickActionsSection extends StatelessWidget {
+class QuickActionsSection extends StatefulWidget {
   const QuickActionsSection({super.key});
 
   @override
+  State<QuickActionsSection> createState() =>
+      _QuickActionsSectionState();
+}
+
+class _QuickActionsSectionState
+    extends State<QuickActionsSection> {
+
+  bool showAll = false;
+
+  @override
   Widget build(BuildContext context) {
+
     final actions = [
 
-      {
-        "title": "Universities",
-        "icon": Icons.school_rounded,
-        "color": const Color(0xff2563EB),
-        "bg": const Color(0xffEEF4FF),
-      },
+      _ActionData(
+        title: "Universities",
+        icon: Icons.school_rounded,
+        color: const Color(0xff2563EB),
+        bg: const Color(0xffEEF4FF),
+        onTap: () {},
+      ),
 
-      {
-        "title": "Incubation",
-        "icon": Icons.apartment_rounded,
-        "color": const Color(0xff14B8A6),
-        "bg": const Color(0xffECFDF5),
-      },
+      _ActionData(
+        title: "Incubation",
+        icon: Icons.apartment_rounded,
+        color: const Color(0xff14B8A6),
+        bg: const Color(0xffECFDF5),
+        onTap: () {},
+      ),
 
-      {
-        "title": "Competitions",
-        "icon": Icons.emoji_events_rounded,
-        "color": const Color(0xff7C3AED),
-        "bg": const Color(0xffF5F3FF),
-      },
+      _ActionData(
+        title: "Competitions",
+        icon: Icons.emoji_events_rounded,
+        color: const Color(0xff7C3AED),
+        bg: const Color(0xffF5F3FF),
+        onTap: () {},
+      ),
 
-      {
-        "title": "Funding",
-        "icon": Icons.currency_rupee_rounded,
-        "color": const Color(0xffF97316),
-        "bg": const Color(0xffFFF7ED),
-      },
+      _ActionData(
+        title: "Funding",
+        icon: Icons.currency_rupee_rounded,
+        color: const Color(0xffF97316),
+        bg: const Color(0xffFFF7ED),
+        onTap: () {},
+      ),
 
-      {
-        "title": "Government",
-        "icon": Icons.account_balance_rounded,
-        "color": const Color(0xffEC4899),
-        "bg": const Color(0xffFDF2F8),
-      },
+      _ActionData(
+        title: "Government",
+        icon: Icons.account_balance_rounded,
+        color: const Color(0xffEC4899),
+        bg: const Color(0xffFDF2F8),
+        onTap: () {},
+      ),
 
-      {
-        "title": "News",
-        "icon": Icons.feed_rounded,
-        "color": const Color(0xff3B82F6),
-        "bg": const Color(0xffEFF6FF),
-      },
+      _ActionData(
+        title: "News",
+        icon: Icons.feed_rounded,
+        color: const Color(0xff3B82F6),
+        bg: const Color(0xffEFF6FF),
+        onTap: () {},
+      ),
 
-      {
-        "title": "AI Assistant",
-        "icon": Icons.smart_toy_rounded,
-        "color": const Color(0xff7C3AED),
-        "bg": const Color(0xffF5F3FF),
-      },
+      _ActionData(
+        title: "AI Assistant",
+        icon: Icons.smart_toy_rounded,
+        color: const Color(0xff8B5CF6),
+        bg: const Color(0xffF5F3FF),
+        onTap: () {},
+      ),
 
-      {
-        "title": "Certificates",
-        "icon": Icons.workspace_premium_rounded,
-        "color": const Color(0xffF59E0B),
-        "bg": const Color(0xffFFFBEB),
-      },
+      _ActionData(
+        title: "Certificates",
+        icon: Icons.workspace_premium_rounded,
+        color: const Color(0xffF59E0B),
+        bg: const Color(0xffFFFBEB),
+        onTap: () {},
+      ),
     ];
 
-    return Column(
-      children: [
+    final visibleActions =
+    showAll
+        ? actions
+        : actions.take(4).toList();
 
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-          ),
-          child: Row(
+    return LayoutBuilder(
+
+      builder: (context, constraints) {
+
+        int crossAxisCount = 2;
+
+        if (constraints.maxWidth > 1200) {
+          crossAxisCount = 6;
+        } else if (constraints.maxWidth > 900) {
+          crossAxisCount = 5;
+        } else if (constraints.maxWidth > 700) {
+          crossAxisCount = 4;
+        } else if (constraints.maxWidth > 500) {
+          crossAxisCount = 3;
+        }
+
+        return Padding(
+
+          padding: const EdgeInsets.all(20),
+
+          child: Column(
+
+            crossAxisAlignment:
+            CrossAxisAlignment.start,
+
             children: [
 
-              const Text(
-                "Quick Actions",
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xff111827),
-                ),
+              Row(
+
+                children: [
+
+                  const Text(
+
+                    "Quick Actions",
+
+                    style: TextStyle(
+
+                      fontSize: 24,
+
+                      fontWeight:
+                      FontWeight.w800,
+                    ),
+                  ),
+
+                  const Spacer(),
+
+                  TextButton(
+
+                    onPressed: () {
+
+                      setState(() {
+
+                        showAll =
+                        !showAll;
+                      });
+                    },
+
+                    child: Text(
+
+                      showAll
+                          ? "Show Less"
+                          : "View All",
+                    ),
+                  ),
+                ],
               ),
 
-              const Spacer(),
+              const SizedBox(
+                height: 16,
+              ),
 
-              InkWell(
-                onTap: () {},
-                child: const Row(
-                  children: [
+              AnimatedSize(
 
-                    Text(
-                      "View All",
-                      style: TextStyle(
-                        color: Color(0xff2563EB),
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                duration:
+                const Duration(
+                  milliseconds: 300,
+                ),
 
-                    SizedBox(width: 4),
+                curve:
+                Curves.easeInOut,
 
-                    Icon(
-                      Icons.arrow_forward,
-                      color: Color(0xff2563EB),
-                      size: 20,
-                    ),
-                  ],
+                child: GridView.builder(
+
+                  shrinkWrap: true,
+
+                  physics:
+                  const NeverScrollableScrollPhysics(),
+
+                  itemCount:
+                  visibleActions.length +
+                      1,
+
+                  gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(
+
+                    crossAxisCount:
+                    crossAxisCount,
+
+                    crossAxisSpacing:
+                    16,
+
+                    mainAxisSpacing:
+                    16,
+
+                    childAspectRatio:
+                    1.15,
+                  ),
+
+                  itemBuilder:
+                      (context, index) {
+
+                    if (index ==
+                        visibleActions
+                            .length) {
+
+                      return GestureDetector(
+
+                        onTap: () {
+
+                          setState(() {
+
+                            showAll =
+                            !showAll;
+                          });
+                        },
+
+                        child: Container(
+
+                          decoration:
+                          BoxDecoration(
+
+                            color:
+                            const Color(
+                              0xffF8FAFC,
+                            ),
+
+                            borderRadius:
+                            BorderRadius.circular(
+                              24,
+                            ),
+
+                            border:
+                            Border.all(
+
+                              color:
+                              const Color(
+                                0xffE2E8F0,
+                              ),
+                            ),
+                          ),
+
+                          child: Column(
+
+                            mainAxisAlignment:
+                            MainAxisAlignment.center,
+
+                            children: [
+
+                              Icon(
+
+                                showAll
+                                    ? Icons.expand_less
+                                    : Icons.apps,
+
+                                size: 34,
+
+                                color:
+                                const Color(
+                                  0xff2563EB,
+                                ),
+                              ),
+
+                              const SizedBox(
+                                height: 12,
+                              ),
+
+                              Text(
+
+                                showAll
+                                    ? "Show Less"
+                                    : "View All",
+
+                                style:
+                                const TextStyle(
+
+                                  fontSize:
+                                  14,
+
+                                  fontWeight:
+                                  FontWeight.w700,
+
+                                  color:
+                                  Color(
+                                    0xff2563EB,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+
+                    return _QuickActionCard(
+                      item:
+                      visibleActions[
+                      index],
+                    );
+                  },
                 ),
               ),
             ],
           ),
-        ),
-
-        const SizedBox(height: 18),
-
-        SizedBox(
-          height: 140,
-          child: ListView.separated(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 24,
-            ),
-            scrollDirection: Axis.horizontal,
-
-            itemBuilder: (_, index) {
-
-              final item =
-              actions[index];
-
-              return _QuickActionCard(
-                title:
-                item["title"] as String,
-
-                icon:
-                item["icon"] as IconData,
-
-                color:
-                item["color"] as Color,
-
-                bg:
-                item["bg"] as Color,
-              );
-            },
-
-            separatorBuilder:
-                (_, __) =>
-            const SizedBox(
-              width: 14,
-            ),
-
-            itemCount:
-            actions.length,
-          ),
-        ),
-      ],
+        );
+      },
     );
   }
 }
-class _QuickActionCard
-    extends StatelessWidget {
+
+class _ActionData {
 
   final String title;
   final IconData icon;
-
   final Color color;
   final Color bg;
+  final VoidCallback onTap;
 
-  const _QuickActionCard({
+  _ActionData({
     required this.title,
     required this.icon,
     required this.color,
     required this.bg,
+    required this.onTap,
   });
+}
+
+class _QuickActionCard
+    extends StatefulWidget {
+
+  final _ActionData item;
+
+  const _QuickActionCard({
+    required this.item,
+  });
+
+  @override
+  State<_QuickActionCard> createState() =>
+      _QuickActionCardState();
+}
+
+class _QuickActionCardState
+    extends State<_QuickActionCard> {
+
+  bool pressed = false;
 
   @override
   Widget build(BuildContext context) {
 
-    return InkWell(
-      borderRadius:
-      BorderRadius.circular(
-          24),
-      onTap: () {},
+    return GestureDetector(
 
-      child: Container(
-        width: 120,
+      onTapDown: (_) {
 
-        decoration: BoxDecoration(
-          color: Colors.white,
+        setState(() {
 
-          borderRadius:
-          BorderRadius.circular(
-              24),
+          pressed = true;
+        });
+      },
 
-          border: Border.all(
-            color: const Color(
-              0xffE5E7EB,
-            ),
-          ),
+      onTapUp: (_) {
 
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black
-                  .withOpacity(.03),
-              blurRadius: 20,
-              offset:
-              const Offset(
-                0,
-                10,
-              ),
-            ),
-          ],
+        setState(() {
+
+          pressed = false;
+        });
+
+        widget.item.onTap();
+      },
+
+      onTapCancel: () {
+
+        setState(() {
+
+          pressed = false;
+        });
+      },
+
+      child: AnimatedScale(
+
+        duration:
+        const Duration(
+          milliseconds: 150,
         ),
 
-        child: Column(
-          mainAxisAlignment:
-          MainAxisAlignment.center,
-          children: [
+        scale:
+        pressed ? .95 : 1,
 
-            Container(
-              width: 62,
-              height: 62,
+        child: Container(
 
-              decoration:
-              BoxDecoration(
-                shape:
-                BoxShape.circle,
-                color: bg,
-              ),
+          decoration:
+          BoxDecoration(
 
-              child: Icon(
-                icon,
-                color: color,
-                size: 32,
-              ),
+            color: Colors.white,
+
+            borderRadius:
+            BorderRadius.circular(
+              24,
             ),
 
-            const SizedBox(
-              height: 14,
+            border: Border.all(
+
+              color:
+              widget.item.color
+                  .withOpacity(.15),
             ),
 
-            Padding(
-              padding:
-              const EdgeInsets
-                  .symmetric(
-                horizontal: 8,
-              ),
-              child: Text(
-                title,
-                textAlign:
-                TextAlign.center,
-                maxLines: 2,
+            boxShadow: [
 
-                style:
-                const TextStyle(
-                  fontSize: 15,
-                  fontWeight:
-                  FontWeight.w600,
+              BoxShadow(
+
+                color:
+                widget.item.color
+                    .withOpacity(.08),
+
+                blurRadius: 20,
+
+                offset:
+                const Offset(
+                  0,
+                  8,
+                ),
+              ),
+            ],
+          ),
+
+          child: Column(
+
+            mainAxisAlignment:
+            MainAxisAlignment.center,
+
+            children: [
+
+              Container(
+
+                width: 58,
+                height: 58,
+
+                decoration:
+                BoxDecoration(
+
+                  shape:
+                  BoxShape.circle,
+
                   color:
-                  Color(
-                    0xff111827,
+                  widget.item.bg,
+                ),
+
+                child: Icon(
+
+                  widget.item.icon,
+
+                  color:
+                  widget.item.color,
+
+                  size: 30,
+                ),
+              ),
+
+              const SizedBox(
+                height: 12,
+              ),
+
+              Padding(
+
+                padding:
+                const EdgeInsets.symmetric(
+                  horizontal: 8,
+                ),
+
+                child: Text(
+
+                  widget.item.title,
+
+                  textAlign:
+                  TextAlign.center,
+
+                  maxLines: 2,
+
+                  overflow:
+                  TextOverflow.ellipsis,
+
+                  style:
+                  const TextStyle(
+
+                    fontSize: 14,
+
+                    fontWeight:
+                    FontWeight.w700,
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -6,57 +6,81 @@ class CompetitionFundingSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24,
-      ),
-      child: Row(
+      padding: const EdgeInsets.all(16),
+      child: Column(
         children: [
 
-          Expanded(
-            child: _CompetitionCard(),
-          ),
+          const FeaturedCompetitionCard(),
 
-          const SizedBox(width: 16),
+          const SizedBox(height: 16),
 
-          Expanded(
-            child: _FundingCard(),
+          Row(
+            children: [
+
+              Expanded(
+                child: FundingCard(),
+              ),
+
+              const SizedBox(width: 12),
+
+              Expanded(
+                child: OpportunitiesCard(),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 }
-class _CompetitionCard extends StatelessWidget {
-  const _CompetitionCard();
+
+class FeaturedCompetitionCard extends StatelessWidget {
+  const FeaturedCompetitionCard({super.key});
 
   @override
   Widget build(BuildContext context) {
 
+    final isMobile =
+        MediaQuery.of(context).size.width < 600;
+
     return Container(
-      height: 260,
+
+      width: double.infinity,
 
       padding: const EdgeInsets.all(20),
 
       decoration: BoxDecoration(
-        borderRadius:
-        BorderRadius.circular(28),
 
-        gradient: const LinearGradient(
+        borderRadius:
+        BorderRadius.circular(30),
+
+        gradient:
+        const LinearGradient(
+
           begin: Alignment.topLeft,
+
           end: Alignment.bottomRight,
+
           colors: [
-            Color(0xff8B5CF6),
-            Color(0xff6366F1),
+
+            Color(0xff4F46E5),
+
+            Color(0xff7C3AED),
           ],
         ),
 
         boxShadow: [
+
           BoxShadow(
+
             color:
-            const Color(0xff8B5CF6)
+            Colors.deepPurple
                 .withOpacity(.25),
+
             blurRadius: 25,
-            offset: const Offset(
+
+            offset:
+            const Offset(
               0,
               12,
             ),
@@ -65,37 +89,90 @@ class _CompetitionCard extends StatelessWidget {
       ),
 
       child: Column(
+
         crossAxisAlignment:
         CrossAxisAlignment.start,
+
+        mainAxisSize:
+        MainAxisSize.min,
+
         children: [
 
           Container(
-            width: 52,
-            height: 52,
+
+            padding:
+            const EdgeInsets.symmetric(
+
+              horizontal: 12,
+
+              vertical: 8,
+            ),
 
             decoration:
             BoxDecoration(
-              color: Colors.white24,
+
+              color:
+              Colors.white24,
+
               borderRadius:
               BorderRadius.circular(
-                  16),
+                30,
+              ),
             ),
 
-            child: const Icon(
-              Icons.emoji_events,
-              color: Colors.white,
-              size: 28,
+            child: const Row(
+
+              mainAxisSize:
+              MainAxisSize.min,
+
+              children: [
+
+                Icon(
+                  Icons.emoji_events,
+                  color:
+                  Colors.amber,
+                  size: 16,
+                ),
+
+                SizedBox(width: 8),
+
+                Text(
+
+                  "FEATURED",
+
+                  style: TextStyle(
+
+                    color:
+                    Colors.white,
+
+                    fontSize: 12,
+
+                    fontWeight:
+                    FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
           ),
 
           const SizedBox(height: 20),
 
-          const Text(
-            "Upcoming\nCompetition",
+          Text(
+
+            "National Drone\nChampionship",
+
             style: TextStyle(
-              color: Colors.white,
-              fontSize: 22,
-              height: 1.2,
+
+              color:
+              Colors.white,
+
+              fontSize:
+              isMobile
+                  ? 18
+                  : 28,
+
+              height: 1.1,
+
               fontWeight:
               FontWeight.bold,
             ),
@@ -103,51 +180,72 @@ class _CompetitionCard extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          const Text(
-            "National Drone Championship",
-            maxLines: 2,
-            overflow:
-            TextOverflow.ellipsis,
+          Text(
+
+            "Compete with innovators and showcase your ideas.",
+
             style: TextStyle(
-              color: Colors.white70,
-              fontSize: 15,
+
+              color:
+              Colors.white70,
+
+              fontSize:
+              isMobile
+                  ? 12
+                  : 14,
             ),
           ),
 
-          const Spacer(),
+          const SizedBox(height: 20),
 
           Container(
+
+            width: double.infinity,
+
             padding:
             const EdgeInsets.symmetric(
+
               horizontal: 12,
-              vertical: 8,
+
+              vertical: 10,
             ),
+
             decoration:
             BoxDecoration(
-              color: Colors.white24,
+
+              color:
+              Colors.white12,
+
               borderRadius:
               BorderRadius.circular(
-                  30),
+                16,
+              ),
             ),
+
             child: const Row(
-              mainAxisSize:
-              MainAxisSize.min,
+
               children: [
 
                 Icon(
                   Icons.schedule,
+                  color:
+                  Colors.white,
                   size: 16,
-                  color: Colors.white,
                 ),
 
-                SizedBox(width: 6),
+                SizedBox(width: 8),
 
                 Text(
+
                   "14 Days Left",
+
                   style: TextStyle(
-                    color: Colors.white,
+
+                    color:
+                    Colors.white,
+
                     fontWeight:
-                    FontWeight.w600,
+                    FontWeight.bold,
                   ),
                 ),
               ],
@@ -156,21 +254,205 @@ class _CompetitionCard extends StatelessWidget {
 
           const SizedBox(height: 16),
 
+          SizedBox(
+
+            width: double.infinity,
+
+            height: 48,
+
+            child:
+            ElevatedButton(
+
+              style:
+              ElevatedButton.styleFrom(
+
+                backgroundColor:
+                Colors.white,
+
+                foregroundColor:
+                const Color(
+                  0xff4F46E5,
+                ),
+
+                elevation: 0,
+
+                shape:
+                RoundedRectangleBorder(
+
+                  borderRadius:
+                  BorderRadius.circular(
+                    14,
+                  ),
+                ),
+              ),
+
+              onPressed: () {},
+
+              child: const Row(
+
+                mainAxisAlignment:
+                MainAxisAlignment.center,
+
+                children: [
+
+                  Text(
+
+                    "Register Now",
+
+                    style: TextStyle(
+
+                      fontWeight:
+                      FontWeight.bold,
+                    ),
+                  ),
+
+                  SizedBox(width: 8),
+
+                  Icon(
+                    Icons.arrow_forward,
+                    size: 18,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FundingCard extends StatelessWidget {
+  const FundingCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+
+      height: 180,
+
+      padding:
+      const EdgeInsets.all(14),
+
+      decoration: BoxDecoration(
+
+        color: Colors.white,
+
+        borderRadius:
+        BorderRadius.circular(
+          20,
+        ),
+
+        boxShadow: [
+
+          BoxShadow(
+
+            color:
+            Colors.green
+                .withOpacity(.08),
+
+            blurRadius: 15,
+          ),
+        ],
+      ),
+
+      child: Column(
+
+        crossAxisAlignment:
+        CrossAxisAlignment.start,
+
+        children: [
+
+          const Icon(
+
+            Icons.currency_rupee,
+
+            color:
+            Colors.green,
+
+            size: 28,
+          ),
+
+          const SizedBox(height: 8),
+
+          const Text(
+
+            "Funding Alert",
+
+            style: TextStyle(
+
+              fontSize: 12,
+
+              color:
+              Colors.green,
+
+              fontWeight:
+              FontWeight.w600,
+            ),
+          ),
+
+          const SizedBox(height: 8),
+
+          const Expanded(
+
+            child: Text(
+
+              "Startup India\nSeed Fund",
+
+              maxLines: 2,
+
+              overflow:
+              TextOverflow
+                  .ellipsis,
+
+              style: TextStyle(
+
+                fontSize: 18,
+
+                fontWeight:
+                FontWeight.bold,
+              ),
+            ),
+          ),
+
           Container(
-            height: 46,
+
+            width:
+            double.infinity,
+
+            padding:
+            const EdgeInsets.symmetric(
+              vertical: 8,
+            ),
+
             decoration:
             BoxDecoration(
-              color: Colors.white,
+
+              color:
+              Colors.green
+                  .shade50,
+
               borderRadius:
               BorderRadius.circular(
-                  14),
+                10,
+              ),
             ),
-            child: const Center(
+
+            child:
+            const Center(
+
               child: Text(
-                "Register Now",
+
+                "₹25 Lakhs",
+
                 style: TextStyle(
+
+                  fontSize: 14,
+
                   color:
-                  Color(0xff6366F1),
+                  Colors.green,
+
                   fontWeight:
                   FontWeight.bold,
                 ),
@@ -182,123 +464,138 @@ class _CompetitionCard extends StatelessWidget {
     );
   }
 }
-class _FundingCard extends StatelessWidget {
-  const _FundingCard();
+
+class OpportunitiesCard extends StatelessWidget {
+  const OpportunitiesCard({super.key});
 
   @override
   Widget build(BuildContext context) {
 
     return Container(
-      height: 260,
 
-      padding: const EdgeInsets.all(20),
+      height: 180,
+
+      padding:
+      const EdgeInsets.all(14),
 
       decoration: BoxDecoration(
-        borderRadius:
-        BorderRadius.circular(28),
 
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xff10B981),
-            Color(0xff34D399),
-          ],
+        color: Colors.white,
+
+        borderRadius:
+        BorderRadius.circular(
+          20,
         ),
 
         boxShadow: [
+
           BoxShadow(
+
             color:
-            const Color(0xff10B981)
-                .withOpacity(.25),
-            blurRadius: 25,
-            offset: const Offset(
-              0,
-              12,
-            ),
+            Colors.orange
+                .withOpacity(.08),
+
+            blurRadius: 15,
           ),
         ],
       ),
 
       child: Column(
+
         crossAxisAlignment:
         CrossAxisAlignment.start,
+
         children: [
 
+          const Icon(
+
+            Icons.workspaces,
+
+            color:
+            Colors.orange,
+
+            size: 28,
+          ),
+
+          const SizedBox(height: 8),
+
+          const Text(
+
+            "Opportunities",
+
+            style: TextStyle(
+
+              fontSize: 12,
+
+              color:
+              Colors.orange,
+
+              fontWeight:
+              FontWeight.w600,
+            ),
+          ),
+
+          const SizedBox(height: 8),
+
+          const Expanded(
+
+            child: Text(
+
+              "50+\nPrograms",
+
+              maxLines: 2,
+
+              overflow:
+              TextOverflow
+                  .ellipsis,
+
+              style: TextStyle(
+
+                fontSize: 18,
+
+                fontWeight:
+                FontWeight.bold,
+              ),
+            ),
+          ),
+
           Container(
-            width: 52,
-            height: 52,
+
+            width:
+            double.infinity,
+
+            padding:
+            const EdgeInsets.symmetric(
+              vertical: 8,
+            ),
 
             decoration:
             BoxDecoration(
-              color: Colors.white24,
+
+              color:
+              Colors.orange
+                  .shade50,
+
               borderRadius:
               BorderRadius.circular(
-                  16),
+                10,
+              ),
             ),
 
-            child: const Icon(
-              Icons.currency_rupee,
-              color: Colors.white,
-              size: 28,
-            ),
-          ),
+            child:
+            const Center(
 
-          const SizedBox(height: 20),
-
-          const Text(
-            "Latest\nFunding Alert",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 22,
-              height: 1.2,
-              fontWeight:
-              FontWeight.bold,
-            ),
-          ),
-
-          const SizedBox(height: 12),
-
-          const Text(
-            "Startup India Seed Fund",
-            maxLines: 2,
-            overflow:
-            TextOverflow.ellipsis,
-            style: TextStyle(
-              color: Colors.white70,
-              fontSize: 15,
-            ),
-          ),
-
-          const Spacer(),
-
-          const Text(
-            "₹25 Lakhs",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight:
-              FontWeight.bold,
-              fontSize: 28,
-            ),
-          ),
-
-          const SizedBox(height: 16),
-
-          Container(
-            height: 46,
-            decoration:
-            BoxDecoration(
-              color: Colors.white,
-              borderRadius:
-              BorderRadius.circular(
-                  14),
-            ),
-            child: const Center(
               child: Text(
-                "Apply Now",
+
+                "Explore",
+
                 style: TextStyle(
+
+                  fontSize: 14,
+
                   color:
-                  Color(0xff10B981),
+                  Colors.orange,
+
                   fontWeight:
                   FontWeight.bold,
                 ),
