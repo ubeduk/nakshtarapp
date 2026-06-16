@@ -15,7 +15,11 @@ class UniversitiesController extends GetxController {
       <UniversityModel>[].obs;
 
   RxBool isLoading = true.obs;
+  RxBool showFilters = false.obs;
 
+  void toggleFilters() {
+    showFilters.value = !showFilters.value;
+  }
   RxString selectedFilter = "All".obs;
 
   final filters = [
