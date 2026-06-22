@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:animate_do/animate_do.dart';
 import '../../core/theme/app_colors.dart';
 import '../../data/models/models.dart';
 
@@ -274,132 +274,208 @@ class UniversityHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(
-        24,
-        60,
-        24,
-        30,
+    return FadeInDown(
+      duration: const Duration(
+        milliseconds: 800,
       ),
-
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xff2563EB),
-            Color(0xff1D4ED8),
-          ],
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.fromLTRB(
+          20,
+          60,
+          20,
+          25,
         ),
-
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(35),
-          bottomRight: Radius.circular(35),
-        ),
-      ),
-
-      child: Column(
-        children: [
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "Drone University Hub",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 8),
-
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "Explore India's leading drone innovation institutes",
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 15,
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 25),
-
-          /// STATS
-          Row(
-            children: [
-
-              _stat(
-                "120+",
-                "Universities",
-              ),
-
-              _stat(
-                "45+",
-                "Labs",
-              ),
-
-              _stat(
-                "30+",
-                "Incubators",
-              ),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xff0F172A),
+              Color(0xff2563EB),
             ],
           ),
-        ],
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment:
+          CrossAxisAlignment.start,
+          children: [
+
+            /// TOP ROW
+            Row(
+              children: [
+
+                ZoomIn(
+                  duration: const Duration(
+                    milliseconds: 900,
+                  ),
+                  child: Container(
+                    width: 52,
+                    height: 52,
+                    decoration: BoxDecoration(
+                      color: Colors.white12,
+                      borderRadius:
+                      BorderRadius.circular(
+                        15,
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.school_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+
+                const Spacer(),
+
+                ZoomIn(
+                  delay: const Duration(
+                    milliseconds: 300,
+                  ),
+                  child: Container(
+                    width: 46,
+                    height: 46,
+                    decoration: BoxDecoration(
+                      color: Colors.white12,
+                      borderRadius:
+                      BorderRadius.circular(
+                        14,
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.notifications_none,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 25),
+
+            FadeInLeft(
+              delay: const Duration(
+                milliseconds: 200,
+              ),
+              child: const Text(
+                "Universities",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight:
+                  FontWeight.w800,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            FadeInLeft(
+              delay: const Duration(
+                milliseconds: 400,
+              ),
+              child: const Text(
+                "Explore Drone Programs & Labs",
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 22),
+
+            Row(
+              children: [
+
+                Expanded(
+                  child: BounceInUp(
+                    delay: const Duration(
+                      milliseconds: 500,
+                    ),
+                    child: _statCard(
+                      "120+",
+                      "Universities",
+                    ),
+                  ),
+                ),
+
+                const SizedBox(width: 10),
+
+                Expanded(
+                  child: BounceInUp(
+                    delay: const Duration(
+                      milliseconds: 650,
+                    ),
+                    child: _statCard(
+                      "45+",
+                      "Labs",
+                    ),
+                  ),
+                ),
+
+                const SizedBox(width: 10),
+
+                Expanded(
+                  child: BounceInUp(
+                    delay: const Duration(
+                      milliseconds: 800,
+                    ),
+                    child: _statCard(
+                      "30+",
+                      "Incubators",
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _stat(
+  static Widget _statCard(
       String value,
       String title,
       ) {
-    return Expanded(
-      child: Container(
-        margin:
-        const EdgeInsets.symmetric(
-          horizontal: 4,
-        ),
+    return Container(
+      padding:
+      const EdgeInsets.symmetric(
+        vertical: 12,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white12,
+        borderRadius:
+        BorderRadius.circular(16),
+      ),
+      child: Column(
+        children: [
 
-        padding:
-        const EdgeInsets.symmetric(
-          vertical: 14,
-        ),
-
-        decoration: BoxDecoration(
-          color: Colors.white12,
-
-          borderRadius:
-          BorderRadius.circular(18),
-        ),
-
-        child: Column(
-          children: [
-
-            Text(
-              value,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight:
+              FontWeight.bold,
+              fontSize: 18,
             ),
+          ),
 
-            const SizedBox(height: 4),
+          const SizedBox(height: 4),
 
-            Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white70,
-                fontSize: 12,
-              ),
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 11,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

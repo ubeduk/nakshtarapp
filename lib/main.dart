@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nakshatr/modules/universities/universities_binding.dart';
+import 'package:nakshatr/modules/competitions/competitions_controller.dart';
+import 'package:nakshatr/modules/funding/funding_controller.dart';
+import 'package:nakshatr/modules/profile/profile_controller.dart';
+
 import 'package:nakshatr/modules/universities/universities_controller.dart';
 
 import 'core/theme/app_theme.dart';
@@ -10,6 +13,9 @@ import 'routes/app_routes.dart';
 void main() {
   runApp(const DroneNakshatraApp());
   Get.put(UniversitiesController());
+  Get.put(CompetitionsController());
+  Get.put(FundingController());
+  Get.put(ProfileController());
 }
 
 class DroneNakshatraApp extends StatelessWidget {
